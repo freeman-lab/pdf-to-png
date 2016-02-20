@@ -1,40 +1,26 @@
-var pdf = require('pdfjs-dist')
-var fs = require('fs')
+var spawn = require('electron-spawn')
+var path = require('path')
 
-module.exports = function(args) {
-  var input = args[1]
-  var output = args[2]
-  var scale = args[3]
+module.exports = function (opts, cb) {
+  var input = opts.input
+  var output = opts.output
+  var scale = opts.scale || 0.5
 
-  var data = new Uint8Array(fs.readFileSync(input))
+  if (!input) cb(new Error('must provide input file'))
+  if (!output) cb(new Error('must provide output file'))
 
-  var canvas = document.createElement('canvas')
-  var ctx = canvas.getContext('2d')
-
-  pdf.getDocument(data).then(function (doc) {
-    doc.getPage(1).then(function (page) {
-      var viewport = page.getViewport(scale)
-
-      canvas.height = viewport.height
-      canvas.width = viewport.width
-
-      var renderer = {
-        canvasContext: ctx,
-        viewport: viewport
-      }
-
-      page.render(renderer).then(function () {
-        ctx.globalCompositeOperation = 'destination-over'
-        ctx.fillStyle = '#ffffff'
-        ctx.fillRect(0, 0, canvas.width, canvas.height)
-        var img = canvas.toDataURL('image/png')
-        img = img.replace(/^data:image\/png;base64,/, "");
-        fs.writeFile(output, img, 'base64', function (err) {
-          if (err) return err
-          require('remote').require('app').quit()
-        })
-      })
-    })
+  var electron = spawn(path.join(__dirname, 'spawn.js'), input, output, scale, {
+    detached: true
   })
 
+  electron.stdout.on('data', function (data) {
+    var message = data.toString()
+    if (message.indexOf('Error: ') === 0) {
+      message = message.replace('Error: ', '')
+      if (cb) cb(new Error(message))
+    }
+    if (message.indexOf('Success: ') === 0) {
+      if (cb) cb()
+    }
+  })
 }

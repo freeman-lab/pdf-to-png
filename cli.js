@@ -1,10 +1,9 @@
-var spawn = require('electron-spawn')
+#!/usr/bin/env node
 var minimist = require('minimist')
-var fs = require('fs')
-var path = require('path')
+var chalk = require('chalk')
 
 var argv = minimist(process.argv.slice(2), {
-  alias: { 
+  alias: {
     h: 'help',
     i: 'input',
     o: 'output',
@@ -16,15 +15,20 @@ var argv = minimist(process.argv.slice(2), {
 })
 
 if (argv.h) {
-  usage(function () { process.exit(1) })
+  console.log('usage: pdf-to-png -i input -o output -s scale\n')
+  console.log('converts an input PDF file to an output PNG thumbnail')
+  process.exit(1)
 }
 
-var electron = spawn('./index.js', argv.i, argv.o, argv.s, {
-  detached: true
-})
+require('./index.js')({
+  input: argv.input,
+  output: argv.output,
+  scale: argv.scale
+}, cb)
 
-function usage (cb) {
-  var r = fs.createReadStream(path.join(__dirname, 'usage.txt'))
-  r.pipe(process.stdout)
-  if (cb) r.once('end', cb)
+function cb (error) {
+  if (error) {
+    console.error('[' + chalk.red('error') + '] ' + error.toString().replace('Error: ', ''))
+    process.exit(1)
+  }
 }
