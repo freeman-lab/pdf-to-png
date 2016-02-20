@@ -43,7 +43,7 @@ As a command line tool
 - `output`: output file
 - `scale`: fraction of full size
 
-##### `converter(opts, [cb])`
+##### `require('pdf-to-png')(opts, [cb])`
 
 - `opts.input`: input file
 - `opts.output`: output file
