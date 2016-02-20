@@ -1,0 +1,3 @@
+usage: pdf-to-png -i input -o output
+
+converts an input PDF file to an output PNG thumbnail
