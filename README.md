@@ -1,4 +1,4 @@
-#pdf-to-png
+# pdf-to-png
 
 Render a PDF to a PNG, useful for generating thumbnails. Just uses `electron-spawn` and `pdf.js`, doesn't require any image processing libraries.
 
