@@ -1,6 +1,8 @@
 # pdf-to-png
 
-Render a PDF to a PNG, useful for generating thumbnails. Just uses `electron-spawn` and `pdf.js`, doesn't require any image processing libraries.
+Render a PDF to a PNG, useful for generating thumbnails. Uses [`electron-spawn`](https://github.com/maxogden/electron-spawn) and [`pdf.js`](https://mozilla.github.io/pdf.js/), so it doesn't require any image processing libraries. Supports a custom scale factor. Currently only renders the first page.
+
+[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
 ## install
 
