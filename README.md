@@ -35,8 +35,6 @@ npm run example
 
 ## usage
 
-As a command line tool
-
 ##### `pdf-to-png -i input -o output -s scale`
 
 - `input`: input file
