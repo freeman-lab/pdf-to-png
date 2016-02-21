@@ -9,9 +9,13 @@ module.exports = function (opts, cb) {
   if (!input) cb(new Error('must provide input file'))
   if (!output) cb(new Error('must provide output file'))
 
-  var electron = spawn(path.join(__dirname, 'spawn.js'), input, output, scale, {
-    detached: true
-  })
+  var electron = spawn(
+    path.join(__dirname, 'spawn.js'),
+    input.replace(/ /g, '\\ '),
+    output.replace(/ /g, '\\ '),
+    scale,
+    {detached: true}
+  )
 
   electron.stdout.on('data', function (data) {
     var message = data.toString()
