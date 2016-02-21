@@ -1,7 +1,7 @@
 {
   "name": "pdf-to-png",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "convert PDF to PNG",
   "main": "index.js",
   "bin": {
     "pdf-to-png": "cli.js"
