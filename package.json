@@ -12,6 +12,10 @@
     "example": "node example.js"
   },
   "author": "freeman-lab",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freeman-lab/pdf-to-png.git"
+  },
   "license": "MIT",
   "dependencies": {
     "chalk": "^1.1.1",
