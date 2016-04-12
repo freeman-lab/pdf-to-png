@@ -19,10 +19,11 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^1.1.1",
+    "electron-prebuilt": "^0.37.5",
     "electron-spawn": "^4.1.0",
     "minimist": "^1.2.0",
     "node-ensure": "0.0.0",
-    "pdfjs-dist": "^1.4.83"
+    "pdfjs-dist": "1.4.205"
   },
   "devDependencies": {
     "tap-spec": "^4.1.1",
